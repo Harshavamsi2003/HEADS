@@ -1,0 +1,52 @@
+/* ---- scroll reveal (toggled by RouteEffects via [data-in]) ---- */
+html.js [data-reveal] {
+  opacity: 0;
+  transition: opacity 0.9s var(--ease) var(--d, 0ms), transform 0.9s var(--ease) var(--d, 0ms), clip-path 1s var(--ease) var(--d, 0ms),
+    translate 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s, background-color 0.35s;
+}
+html.js [data-reveal="up"] { transform: translateY(2rem); }
+html.js [data-reveal="left"] { transform: translateX(-2.4rem); }
+html.js [data-reveal="right"] { transform: translateX(2.4rem); }
+html.js [data-reveal="scale"] { transform: scale(0.9); }
+html.js [data-reveal="fade"] { transform: none; }
+html.js [data-reveal][data-in] { opacity: 1; transform: none; }
+
+/* heading accent line draws itself, icon badges pop in once their card is revealed */
+html.js .sec-head .eyebrow::before, html.js .split__text > .eyebrow::before { transform: scaleX(0); transform-origin: left; transition: transform 0.9s var(--ease) 0.25s; }
+html.js .sec-head[data-in] .eyebrow::before, html.js .split__text[data-in] > .eyebrow::before { transform: none; }
+html.js [data-in] .ibadge, html.js [data-in] .ind-card__icon, html.js [data-in] .ind__icon { animation: pop 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both; }
+html.js [data-in] .checklist__tick { animation: pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s both; }
+@keyframes pop { from { scale: 0.4; opacity: 0; } to { scale: 1; opacity: 1; } }
+
+/* ---- hero load-in (pure CSS, works without JS).
+   .rise-t moves only (text is visible immediately → fast paint / good LCP) */
+.rise { animation: rise 0.85s var(--ease) var(--d, 0ms) both; }
+@keyframes rise { from { opacity: 0; transform: translateY(1.3rem); } to { opacity: 1; transform: none; } }
+.rise-t { animation: rise-t 0.9s var(--ease) var(--d, 0ms) both; }
+@keyframes rise-t { from { translate: 0 1.6rem; } to { translate: 0 0; } }
+
+/* ---- hero scroll transition: content drifts up and softens as you scroll away (--p set in RouteEffects) ---- */
+[data-hero] .hero__copy, [data-hero] .page-hero__inner { translate: 0 calc(var(--p, 0) * -2.6rem); opacity: calc(1 - var(--p, 0) * 0.85); will-change: translate, opacity; }
+[data-hero] .hero__visual { translate: 0 calc(var(--p, 0) * 2rem); scale: calc(1 - var(--p, 0) * 0.05); opacity: calc(1 - var(--p, 0) * 0.7); }
+
+/* ---- page-to-page transition (added by RouteEffects on client navigation) ---- */
+.page-enter { animation: page-in 0.6s var(--ease) both; }
+@keyframes page-in { from { opacity: 0; translate: 0 1.2rem; } to { opacity: 1; translate: 0 0; } }
+
+/* ---- opening curtain: logo appears, panel slides up ---- */
+.intro { position: fixed; inset: 0; z-index: 300; display: grid; place-items: center; background: var(--bg-dark); pointer-events: none; animation: intro-out 0.9s cubic-bezier(0.76, 0, 0.24, 1) 0.85s forwards; }
+.intro__mark { width: clamp(4rem, 9vw, 6.5rem); height: auto; animation: intro-mark 0.85s var(--ease) both; }
+@keyframes intro-mark { 0% { opacity: 0; scale: 0.75; } 45% { opacity: 1; scale: 1; } 100% { opacity: 1; scale: 1.04; } }
+@keyframes intro-out { to { translate: 0 -100%; visibility: hidden; } }
+
+@keyframes dash { to { stroke-dashoffset: -28; } }
+@keyframes ping { 0% { box-shadow: 0 0 0 0 currentColor; } 70%, 100% { box-shadow: 0 0 0 0.5rem transparent; } }
+@keyframes float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -0.7rem; } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  html.js [data-reveal] { opacity: 1; transform: none; }
+  .intro { display: none; }
+  [data-hero] .hero__copy, [data-hero] .page-hero__inner, [data-hero] .hero__visual { translate: none; scale: none; opacity: 1; }
+}

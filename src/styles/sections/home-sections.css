@@ -1,0 +1,133 @@
+/* ---------- tools: two compact rows of chips drifting in opposite directions ---------- */
+.tools { padding-bottom: calc(var(--sec-y) * 0.85); }
+.tools .sec-head { margin-bottom: clamp(1.6rem, 3.5vw, 2.6rem); }
+.tools__rows { display: grid; gap: clamp(0.8rem, 1.5vw, 1.1rem); padding-block: 0.7rem; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); }
+.tools__row { display: flex; overflow: hidden; padding-block: 0.35rem; }
+.tools__track { display: flex; flex: none; min-width: 100%; align-items: center; justify-content: space-around; gap: clamp(0.8rem, 1.5vw, 1.1rem); padding-right: clamp(0.8rem, 1.5vw, 1.1rem); animation: marquee var(--dur, 75s) linear infinite; }
+.tools__row--1 .tools__track { --dur: 75s; }
+.tools__row--2 .tools__track { --dur: 90s; animation-direction: reverse; }
+.tools__row:hover .tools__track { animation-play-state: paused; }
+
+.tool { position: relative; display: inline-flex; align-items: center; gap: 0.85rem; padding: 0.5rem 1.6rem 0.5rem 0.5rem; border-radius: 999px; background: #fff; border: 1px solid var(--slate-200); box-shadow: 0 0.15rem 0.7rem rgba(5, 7, 81, 0.06); white-space: nowrap; overflow: hidden; transition: border-color 0.3s, box-shadow 0.35s, translate 0.35s var(--ease); }
+.tool > * { position: relative; z-index: 1; }
+/* light sheen that sweeps across the chip on hover */
+.tool::before { content: ""; position: absolute; top: 0; bottom: 0; left: -45%; width: 32%; background: linear-gradient(100deg, transparent, rgba(91, 103, 245, 0.18), transparent); transform: skewX(-18deg); transition: left 0.8s var(--ease); pointer-events: none; }
+.tool:hover::before { left: 125%; }
+.tool__badge { display: grid; place-items: center; flex: none; width: 2.6rem; height: 2.6rem; border-radius: 50%; background: var(--navy-900); color: #fff; font-family: var(--font-display); font-weight: 700; font-size: 0.78rem; letter-spacing: 0.05em; box-shadow: 0 0 0 0.22rem rgba(5, 7, 81, 0.08); transition: background-color 0.3s, scale 0.35s var(--ease), box-shadow 0.3s; }
+.tool[data-g="1"] .tool__badge { background: var(--accent-ink); box-shadow: 0 0 0 0.22rem rgba(43, 53, 201, 0.12); }
+.tool[data-g="2"] .tool__badge { background: var(--slate-500); box-shadow: 0 0 0 0.22rem rgba(101, 111, 138, 0.16); }
+.tool__txt { display: grid; gap: 0.1rem; line-height: 1.25; }
+.tool__name { font-family: var(--font-display); font-weight: 650; font-size: 0.98rem; color: var(--ink); letter-spacing: -0.005em; }
+.tool__group { font-size: 0.72rem; letter-spacing: 0.03em; color: var(--slate-500); }
+.tool:hover { translate: 0 -0.22rem; border-color: var(--accent-soft); box-shadow: 0 0.9rem 1.9rem rgba(5, 7, 81, 0.14); }
+.tool:hover .tool__badge { scale: 1.1; box-shadow: 0 0 0 0.3rem rgba(91, 103, 245, 0.22); }
+@keyframes marquee { to { translate: -100% 0; } }
+/* "Reduce motion" visitors still get a calm, slow drift — a frozen strip looks broken. */
+@media (prefers-reduced-motion: reduce) {
+  .tools__track { animation-duration: 140s !important; animation-iteration-count: infinite !important; }
+}
+
+/* ---------- what we do: connected process line ---------- */
+.process { position: relative; display: grid; gap: 2rem; }
+.process__step { position: relative; display: grid; grid-template-columns: auto 1fr; gap: 1.2rem; align-items: start; }
+.process__node { position: relative; z-index: 1; display: grid; place-items: center; width: 4.2rem; height: 4.2rem; border-radius: 50%; background: #fff; color: var(--navy-900); border: 2px solid var(--navy-900); box-shadow: 0 0 0 0.45rem #eef1f8; transition: background-color 0.3s, color 0.3s, scale 0.35s var(--ease); }
+.process__node .icon { width: 1.7rem; height: 1.7rem; }
+.process__step:hover .process__node { background: var(--navy-900); color: #fff; scale: 1.08; }
+.process__step h3 { font-size: 1.12rem; margin-bottom: 0.4rem; }
+.process__step p { color: var(--muted); font-size: 0.95rem; }
+/* mobile: vertical line on the left */
+.process::before { content: ""; position: absolute; left: 2.1rem; top: 2rem; bottom: 2rem; width: 2px; background: var(--slate-200); }
+.process::after { content: ""; position: absolute; left: 2.1rem; top: 2rem; bottom: 2rem; width: 2px; background: var(--navy-900); transform: scaleY(0); transform-origin: top; transition: transform 1.6s var(--ease) 0.2s; }
+html.js .process[data-in]::after { transform: scaleY(1); }
+html:not(.js) .process::after { transform: none; }
+@media (min-width: 64rem) {
+  .process { grid-template-columns: repeat(5, 1fr); gap: 1.2rem; }
+  .process__step { grid-template-columns: 1fr; gap: 1.4rem; }
+  .process::before, .process::after { left: 2.1rem; right: 2.1rem; top: 2.1rem; bottom: auto; width: auto; height: 2px; }
+  .process::after { transform: scaleX(0); transform-origin: left; }
+  html.js .process[data-in]::after { transform: scaleX(1); }
+}
+
+/* ---------- industries: photo cards ---------- */
+.tiles { display: grid; grid-template-columns: 1fr; gap: 1.2rem; }
+.tile { position: relative; display: flex; flex-direction: column; overflow: hidden; border-radius: var(--radius-lg); isolation: isolate; color: #fff; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.16); transition: translate 0.4s var(--ease), border-color 0.4s, box-shadow 0.4s; }
+.tile:hover { translate: 0 -0.4rem; border-color: rgba(244, 193, 93, 0.6); box-shadow: 0 1.8rem 3.6rem rgba(0, 0, 0, 0.35); }
+.tile__media { position: relative; display: block; aspect-ratio: 3 / 2; overflow: hidden; }
+.tile__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: scale 1.4s var(--ease); }
+.tile:hover .tile__media img { scale: 1.07; }
+.tile__shade { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(5, 7, 81, 0.5) 0%, transparent 45%); }
+.tile__go { position: absolute; top: 1rem; right: 1rem; z-index: 2; display: grid; place-items: center; width: 2.8rem; height: 2.8rem; border-radius: 50%; color: #fff; background: rgba(5, 7, 81, 0.55); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); transition: background-color 0.3s, color 0.3s, rotate 0.4s var(--ease); }
+.tile__go .icon { width: 1.15rem; height: 1.15rem; }
+.tile:hover .tile__go { background: var(--accent-soft); color: var(--navy-900); rotate: 45deg; }
+.tile__body { position: relative; display: grid; gap: 0.65rem; align-content: start; flex: 1; padding: clamp(1.3rem, 2.4vw, 1.8rem); }
+.tile__icon { display: grid; place-items: center; width: 2.7rem; height: 2.7rem; border-radius: 50%; color: var(--navy-900); background: var(--accent-soft); }
+.tile__icon .icon { width: 1.25rem; height: 1.25rem; }
+.tile__title { font-family: var(--font-display); font-weight: 650; font-size: clamp(1.3rem, 1rem + 0.9vw, 1.7rem); line-height: 1.15; letter-spacing: -0.02em; }
+.tile__text { font-size: 0.95rem; line-height: 1.55; color: #dfe4f7; }
+.tile__more { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 0.4rem; font-weight: 600; font-size: 0.92rem; color: var(--accent-soft); }
+.tile__more .icon { width: 1rem; height: 1rem; transition: translate 0.3s var(--ease); }
+.tile:hover .tile__more .icon { translate: 0.35rem 0; }
+@media (min-width: 48rem) { .tiles { grid-template-columns: repeat(3, 1fr); gap: 1.2rem; } .tile__text { display: none; } }
+@media (min-width: 62rem) { .tiles { gap: 1.5rem; } .tile__text { display: block; } }
+
+/* phones: swipeable photo tiles with the text over the picture — the next tile peeks in */
+@media (max-width: 47.99rem) {
+  .tiles { grid-auto-flow: column; grid-auto-columns: 78%; grid-template-columns: none; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 var(--gutter) 1.2rem; margin-inline: calc(var(--gutter) * -1); scroll-padding-inline: var(--gutter); scrollbar-width: none; }
+  .tiles::-webkit-scrollbar { display: none; }
+  .tiles > li { scroll-snap-align: start; }
+  .tile { display: block; aspect-ratio: 4 / 5; box-shadow: var(--shadow-lg); }
+  .tile__media { position: absolute; inset: 0; aspect-ratio: auto; z-index: -1; }
+  .tile__shade { background: linear-gradient(0deg, rgba(5, 7, 81, 0.94) 0%, rgba(5, 7, 81, 0.6) 34%, rgba(5, 7, 81, 0.08) 68%); }
+  .tile__go { background: rgba(255, 255, 255, 0.16); }
+  .tile__body { position: absolute; left: 0; right: 0; bottom: 0; padding: 1.3rem; }
+  .tile__text, .tile__more { display: none; }
+}
+
+/* ---------- featured project ---------- */
+.feature { display: grid; overflow: hidden; border-radius: var(--radius-lg); background: #fff; border: 1px solid var(--slate-100); box-shadow: var(--shadow-md); }
+@media (min-width: 60rem) { .feature { grid-template-columns: 1fr 1fr; } }
+.feature__text { display: grid; gap: 1.1rem; align-content: center; padding: clamp(1.6rem, 4vw, 3.4rem); }
+.feature__text p { color: var(--muted); }
+.feature__art { position: relative; display: block; padding: 0; border-radius: 0; box-shadow: none; min-height: 18rem; background: var(--navy-900); }
+/* phones: picture first, details below */
+@media (max-width: 59.99rem) { .feature__art { order: -1; min-height: 14rem; } .feature__text { padding: 1.5rem 1.3rem 1.8rem; } }
+
+/* ---------- why HEADS: sticky title + divided list ---------- */
+.why { display: grid; gap: clamp(1.8rem, 5vw, 4.5rem); }
+@media (min-width: 62rem) { .why { grid-template-columns: 0.8fr 1.2fr; align-items: start; } .why__lead { position: sticky; top: calc(var(--nav-h) + 2rem); } }
+.why__lead { display: grid; gap: 1.1rem; justify-items: start; }
+.why__lead > p { color: var(--muted); font-size: 1.04rem; }
+.why__list { border-top: 1px solid var(--slate-200); }
+.why__item { display: grid; grid-template-columns: auto 1fr; gap: 1.3rem; padding: 1.6rem 0; border-bottom: 1px solid var(--slate-200); transition: padding 0.35s var(--ease); }
+.why__item:hover { padding-left: 0.8rem; }
+.why__item h3 { font-size: 1.15rem; margin-bottom: 0.3rem; }
+.why__item p { color: var(--muted); font-size: 0.97rem; }
+
+/* ======================================================================
+   HOME ON PHONES (< 48rem): shorter, calmer sections — headings, titles and the key action only.
+   Full descriptions stay on desktop/tablet and on the Services page.
+   ====================================================================== */
+@media (max-width: 47.99rem) {
+  .home .sec-head { margin-bottom: 1.6rem; }
+  .home .sec-head__lead { display: none; }
+
+  /* what we do: title + two lines */
+  .home .process { gap: 1.4rem; }
+  .home .process__step p { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+  /* featured project: picture, title, status, button */
+  .home .feature__art { min-height: 13rem; }
+  .home .feature__text > p, .home .feature__text .meta > div:not(:last-child) { display: none; }
+  .home .feature__text .meta { border: 0; padding: 0; }
+  .home .feature__text { gap: 0.9rem; }
+
+  /* why HEADS: a compact list of five */
+  .home .why__lead > p, .home .why__lead .btn-row { display: none; }
+  .home .why__item { align-items: center; padding: 1rem 0; }
+  .home .why__item p { display: none; }
+  .home .why__item h3 { margin: 0; font-size: 1.05rem; }
+
+  /* closing call to action */
+  .home .cta__text { display: none; }
+  .home .cta__box { padding: 2.2rem 1.4rem; gap: 1rem; }
+}

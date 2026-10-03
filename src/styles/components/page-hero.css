@@ -1,0 +1,16 @@
+.page-hero { position: relative; overflow: hidden; color: #fff; background: var(--bg-dark); padding: calc(var(--nav-h) + clamp(2.8rem, 6vw, 5.5rem)) 0 calc(clamp(3rem, 6vw, 5.5rem) + var(--round)); }
+.page-hero__inner { position: relative; display: grid; gap: 1.15rem; justify-items: start; }
+.page-hero__title { color: #fff; font-size: clamp(1.9rem, 1rem + 3.1vw, 3.6rem); max-width: 22ch; }
+.page-hero__lead { color: var(--slate-300); font-size: clamp(1rem, 0.95rem + 0.3vw, 1.2rem); max-width: 56rem; line-height: 1.7; }
+.page-hero__extra { margin-top: 0.6rem; }
+
+.crumbs ol { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 0.6rem; font-size: 0.82rem; color: var(--slate-400); }
+.crumbs li + li::before { content: "/"; margin-right: 0.6rem; opacity: 0.5; }
+.crumbs a { color: var(--slate-300); transition: color 0.2s; }
+.crumbs a:hover { color: #fff; }
+.crumbs [aria-current] { color: #fff; }
+
+.hero-meta { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+.hero-meta > div { padding: 0.8rem 1.2rem; border-radius: 0.9rem; background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(255, 255, 255, 0.16); min-width: 10rem; }
+.hero-meta dt { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--slate-400); }
+.hero-meta dd { font-family: var(--font-display); font-weight: 600; color: #fff; font-size: 0.98rem; }

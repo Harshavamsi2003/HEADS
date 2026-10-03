@@ -1,0 +1,28 @@
+.footer { position: relative; overflow: hidden; background: var(--navy-900); color: var(--slate-300); padding-top: calc(clamp(3.5rem, 7vw, 6rem) + var(--round)); margin-top: calc(var(--round) * -1); border-radius: var(--round) var(--round) 0 0; }
+.footer .container { position: relative; z-index: 1; }
+.footer__grid { display: grid; gap: 2.4rem 2rem; grid-template-columns: 1fr; padding-bottom: clamp(2.5rem, 5vw, 4rem); }
+@media (min-width: 36rem) { .footer__grid { grid-template-columns: repeat(2, 1fr); } .footer__brand { grid-column: 1 / -1; } }
+@media (min-width: 64rem) { .footer__grid { grid-template-columns: 1.5fr 1fr 1fr 1.2fr 1.5fr; } .footer__brand { grid-column: auto; } }
+.footer__logo { width: clamp(9rem, 14vw, 12rem); height: auto; }
+.footer__name { margin-top: 1.1rem; font-family: var(--font-display); font-weight: 600; color: #fff; font-size: 1rem; }
+.footer__tag { margin-top: 0.4rem; font-size: 0.88rem; max-width: 20rem; color: var(--slate-400); }
+.footer__h { font-family: var(--font-display); font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: #fff; margin-bottom: 1.1rem; font-weight: 600; }
+.footer__col li { margin-bottom: 0.6rem; font-size: 0.92rem; }
+.footer__col a { color: var(--slate-300); transition: color 0.2s, padding 0.25s var(--ease); }
+.footer__col a:hover { color: #fff; padding-left: 0.3rem; }
+.footer__contact li { display: flex; gap: 0.7rem; align-items: flex-start; }
+.footer__contact .icon { flex: none; width: 1.1rem; height: 1.1rem; margin-top: 0.28rem; color: var(--accent-soft); }
+.footer__contact a:hover { padding-left: 0; }
+.footer__contact address { font-size: 0.92rem; line-height: 1.55; }
+.footer__bar { display: flex; flex-wrap: wrap; gap: 0.6rem 2rem; justify-content: space-between; padding-block: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.82rem; color: var(--slate-400); }
+.footer__bar a { color: var(--slate-300); }
+.footer__bar a:hover { color: #fff; }
+
+/* phones: two link columns side by side instead of one very long list */
+@media (max-width: 35.99rem) {
+  .footer__grid { grid-template-columns: 1fr 1fr; gap: 1.8rem 1.2rem; }
+  .footer__brand, .footer__contact { grid-column: 1 / -1; }
+  .footer__tag { display: none; }
+  .footer__col li { margin-bottom: 0.45rem; font-size: 0.88rem; }
+  .footer__h { margin-bottom: 0.8rem; }
+}

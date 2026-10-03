@@ -1,0 +1,53 @@
+/* ==========================================================================
+   DESIGN TOKENS — colours are taken from the HEADS logo:
+     logo navy  #050751   |   logo slate  #656F8A
+   Change a value here and the whole site follows.
+   ========================================================================== */
+:root {
+  /* brand */
+  --navy-950: #03042f;
+  --navy-900: #050751;          /* logo navy */
+  --navy-800: #0b0f6e;
+  --navy-700: #1a21a0;
+  --accent: #5b67f5;            /* bright tint of the logo hue — glows & highlights on dark */
+  --accent-soft: #f4c15d;        /* warm gold: highlights on dark sections — echoes the yellow rigs & sunset in the photography */
+  --accent-ink: #2b35c9;        /* links / highlights on light backgrounds (AA contrast) */
+  --slate-500: #656f8a;         /* logo slate */
+  --slate-400: #8a93ac;
+  --slate-300: #aeb8d6;
+  --slate-200: #d5dae8;
+  --slate-100: #e7eaf3;
+  --slate-50: #f2f4fa;
+  --paper: #f7f8fb;
+  --white: #fff;
+
+  /* text */
+  --ink: #0a0d3d;
+  --text: #39415f;
+  --muted: #5f6985;
+
+  /* type */
+  --font-display: "Sora Variable", "Sora", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Inter Variable", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* layout */
+  --container: 82rem;
+  --container-wide: var(--container);
+  --gutter: clamp(1.1rem, 4.2vw, 3.25rem);
+  --sec-y: clamp(3.75rem, 7.5vw, 7.5rem);
+  --nav-h: 4.6rem;
+  --radius: 1.15rem;
+  --radius-lg: 1.6rem;
+
+  /* effects */
+  --ease: cubic-bezier(0.22, 0.61, 0.24, 1);
+  --shadow-sm: 0 0.15rem 0.5rem rgba(5, 7, 81, 0.06);
+  --shadow-md: 0 1rem 2.4rem rgba(5, 7, 81, 0.1);
+  --shadow-lg: 0 1.8rem 4rem rgba(5, 7, 81, 0.18);
+  --bg-dark: #0a0d6b;           /* the solid brand blue used for every dark section */
+  --round: clamp(1.4rem, 3.4vw, 3.2rem);   /* rounded 'sheet' corner used for section transitions */
+}
+
+/* wider content on large monitors (rem itself also scales up — see reset.css) */
+@media (min-width: 120rem) { :root { --container: 90rem; } }
+@media (min-width: 160rem) { :root { --container: 100rem; } }

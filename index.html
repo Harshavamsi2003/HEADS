@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>HEADS – Hari Engineering and Design Solutions</title>
+    <!--head-tags-->
+
+    <!-- Favicons: Google needs a square icon whose size is a multiple of 48px.
+         Regenerate with `npm run icons` if the logo ever changes. -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#050751" />
+    <meta name="color-scheme" content="light" />
+
+    <!-- Scroll-reveal animations only hide content when JS is running; if the
+         bundle never loads, the page is shown as normal. -->
+    <script>
+      document.documentElement.classList.add("js");
+      setTimeout(function () {
+        if (!window.__heads_ready) document.documentElement.classList.remove("js");
+      }, 6000);
+    </script>
+    <noscript><style>[data-reveal]{opacity:1!important;transform:none!important}</style></noscript>
+  </head>
+  <body>
+    <div id="root"><!--app-html--></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

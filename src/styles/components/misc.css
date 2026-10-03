@@ -1,0 +1,15 @@
+.logo { height: auto; }
+
+/* ---------- page contents: small tab on the right edge ---------- */
+.toc { position: fixed; right: 0; top: 50%; z-index: 80; translate: 0 -50%; }
+.toc__btn { display: grid; place-items: center; width: 2.3rem; height: 3.2rem; border-radius: 0.8rem 0 0 0.8rem; color: #fff; background: var(--navy-900); border: 1px solid rgba(255, 255, 255, 0.35); border-right: 0; box-shadow: -0.2rem 0.4rem 1.2rem rgba(5, 7, 81, 0.35); transition: width 0.3s var(--ease), background-color 0.3s; }
+.toc__btn:hover, .toc.is-open .toc__btn { width: 2.9rem; background: var(--accent-ink); }
+.toc__btn .icon { width: 1.15rem; height: 1.15rem; }
+.toc__panel { position: absolute; right: 3.2rem; top: 50%; width: min(17rem, calc(100vw - 5rem)); translate: 1rem -50%; padding: 1.1rem 0.7rem 0.8rem; border-radius: 1rem; background: rgba(255, 255, 255, 0.96); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border: 1px solid var(--slate-100); box-shadow: 0 1.2rem 3rem rgba(5, 7, 81, 0.25); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.25s, translate 0.3s var(--ease), visibility 0.25s; }
+.toc.is-open .toc__panel { opacity: 1; visibility: visible; pointer-events: auto; translate: 0 -50%; }
+.toc__title { padding: 0 0.7rem 0.6rem; font-family: var(--font-display); font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--slate-500); font-weight: 600; }
+.toc__panel a { position: relative; display: block; padding: 0.55rem 0.7rem 0.55rem 0.9rem; border-radius: 0.6rem; font-size: 0.9rem; font-weight: 500; color: var(--text); transition: background-color 0.2s, color 0.2s; }
+.toc__panel a:hover { background: var(--slate-50); color: var(--navy-900); }
+.toc__panel a.is-active { color: var(--navy-900); font-weight: 650; background: #eef0ff; }
+.toc__panel a.is-active::before { content: ""; position: absolute; left: 0; top: 0.5rem; bottom: 0.5rem; width: 0.2rem; border-radius: 2px; background: var(--accent-ink); }
+@media (max-width: 40rem) { .toc__btn { width: 2rem; height: 2.8rem; } }

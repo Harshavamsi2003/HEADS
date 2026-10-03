@@ -1,0 +1,32 @@
+/* HEADS website — stylesheet entry. Order matters: base → components → sections → pages. */
+@import "@fontsource-variable/inter/wght.css";
+@import "@fontsource-variable/sora/wght.css";
+
+/* base */
+@import "./base/tokens.css";
+@import "./base/reset.css";
+@import "./base/typography.css";
+@import "./base/layout.css";
+@import "./base/animations.css";
+
+/* shared components */
+@import "./components/button.css";
+@import "./components/navbar.css";
+@import "./components/footer.css";
+@import "./components/page-hero.css";
+@import "./components/cards.css";
+@import "./components/lists.css";
+@import "./components/cta.css";
+@import "./components/form.css";
+@import "./components/photo.css";
+@import "./components/misc.css";
+
+/* home-page sections */
+@import "./sections/home-hero.css";
+@import "./sections/home-sections.css";
+
+/* pages */
+@import "./pages/about.css";
+@import "./pages/services.css";
+@import "./pages/capabilities.css";
+@import "./pages/contact.css";

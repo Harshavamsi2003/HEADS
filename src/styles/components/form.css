@@ -1,0 +1,25 @@
+.form { display: grid; gap: 1.1rem; }
+.form h2 { font-size: clamp(1.4rem, 1rem + 1vw, 2rem); }
+.form__row { display: grid; gap: 1.1rem; }
+@media (min-width: 40rem) { .form__row { grid-template-columns: 1fr 1fr; } }
+.field { display: grid; gap: 0.4rem; }
+.field > span { font-size: 0.85rem; font-weight: 600; color: var(--ink); font-family: var(--font-display); }
+.field > span i { color: #c0392b; font-style: normal; }
+.field input:not([type="file"]), .field textarea { width: 100%; padding: 0.85rem 1rem; border-radius: 0.85rem; border: 1px solid var(--slate-200); background: #fff; font-size: 1rem; transition: border-color 0.25s, box-shadow 0.25s; }
+.field textarea { resize: vertical; min-height: 8rem; }
+.field input::placeholder, .field textarea::placeholder { color: var(--slate-400); }
+.field input:focus, .field textarea:focus { outline: none; border-color: var(--accent-ink); box-shadow: 0 0 0 0.2rem rgba(43, 53, 201, 0.15); }
+.field--err input, .field--err textarea { border-color: #c0392b; }
+.field em { font-style: normal; font-size: 0.82rem; color: #c0392b; }
+.field--file input[type="file"] { padding: 0.7rem; border: 1px dashed var(--slate-300); border-radius: 0.85rem; background: var(--slate-50); width: 100%; font-size: 0.9rem; }
+.field--file input[type="file"]::file-selector-button { margin-right: 0.9rem; padding: 0.45rem 0.9rem; border: 0; border-radius: 999px; background: var(--navy-900); color: #fff; font-weight: 600; cursor: pointer; }
+.field small { font-size: 0.8rem; color: var(--slate-500); }
+.hp { position: absolute !important; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.form__submit { justify-self: start; margin-top: 0.4rem; }
+@media (max-width: 30rem) { .form__submit { justify-self: stretch; } }
+.form__error { padding: 0.9rem 1rem; border-radius: 0.8rem; background: #fdeceb; color: #8d2a20; font-size: 0.92rem; }
+.form__error a { text-decoration: underline; }
+.form-done { display: grid; gap: 1rem; justify-items: start; padding: 1rem 0; }
+.form-done__icon { display: grid; place-items: center; width: 4rem; height: 4rem; border-radius: 50%; background: var(--navy-900); color: #fff; }
+.form-done__icon .icon { width: 2rem; height: 2rem; stroke-width: 2.4; }
+.form-done p { color: var(--muted); max-width: 32rem; }

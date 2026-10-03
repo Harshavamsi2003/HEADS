@@ -1,0 +1,68 @@
+/* HOME HERO — one full screen on every device.
+   Desktop / landscape: photo fills the screen, text sits on the left over the sky.
+   Portrait (phones, tablets held upright): the portrait photo is used and the text is
+   anchored to the bottom over the sea, so the platform stays visible above it. */
+.hero { position: relative; isolation: isolate; overflow: hidden; display: flex; align-items: center; min-height: 100svh; color: #fff; background: var(--bg-dark); padding: calc(var(--nav-h) + 1rem) 0 calc(var(--round) + 1.5rem); }
+
+/* photo (a little taller than the hero so the scroll-parallax never shows an edge) */
+.hero__photo { position: absolute; inset: -6% 0; display: block; z-index: 0; }
+.hero__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 68% 40%; animation: hero-settle 2.8s var(--ease) both; translate: 0 calc(var(--p, 0) * 3rem); will-change: scale, translate; }
+@keyframes hero-settle { from { scale: 1.14; } to { scale: 1; } }
+/* navy veil so white text is always readable (strongest where the text is) */
+.hero__scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(5, 7, 81, 0.94) 0%, rgba(5, 7, 81, 0.8) 32%, rgba(5, 7, 81, 0.3) 60%, rgba(5, 7, 81, 0.04) 100%), linear-gradient(0deg, rgba(5, 7, 81, 0.5) 0%, transparent 30%); }
+
+.hero__grid { position: relative; z-index: 2; display: grid; }
+.hero__copy { display: grid; gap: clamp(0.8rem, 2.2svh, 1.4rem); justify-items: start; max-width: 39rem; }
+
+.hero__title { color: #fff; font-size: clamp(2rem, min(1rem + 3.4vw, 7.6svh), 4.3rem); line-height: 1.06; letter-spacing: -0.035em; font-weight: 700; }
+.hero__sub { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.01em; color: #fff; font-size: clamp(1.05rem, min(0.85rem + 1.3vw, 3.8svh), 1.9rem); line-height: 1.25; }
+.hero__tagline { font-family: var(--font-display); font-weight: 600; font-size: clamp(0.9rem, min(0.82rem + 0.45vw, 2.6svh), 1.2rem); color: var(--accent-soft); }
+.hero__text { color: #e3e7f7; font-size: clamp(0.98rem, min(0.92rem + 0.3vw, 2.5svh), 1.15rem); max-width: 34rem; line-height: 1.7; }
+.hero__actions { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-top: 0.3rem; }
+
+/* heading words slide up out of a mask, one after another */
+.hw { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.12em; margin-bottom: -0.12em; }
+.hw > span { display: inline-block; animation: word-up 0.85s var(--ease) calc(var(--i) * 80ms + 120ms) both; }
+@keyframes word-up { from { translate: 0 115%; } to { translate: 0 0; } }
+.hero__sub { position: relative; }
+@keyframes sheen { 0%, 55% { left: -60%; } 100% { left: 130%; } }
+@keyframes bar-draw { to { transform: scaleY(1); } }
+
+/* ======================== PORTRAIT screens (phones, tablets upright) ======================== */
+@media (max-aspect-ratio: 1/1) {
+  .hero { align-items: stretch; padding: calc(var(--nav-h) + 0.4rem) 0 calc(var(--round) + 1.8rem); }
+  /* taller box aligned to the bottom lifts the platform up, clear of the text */
+  .hero__photo { inset: auto 0 0 0; height: 118%; }
+  .hero__photo img { object-position: 82% 100%; }
+  .hero__scrim { background: linear-gradient(180deg, rgba(5, 7, 81, 0.55) 0%, rgba(5, 7, 81, 0.05) 22%, rgba(5, 7, 81, 0.12) 42%, rgba(5, 7, 81, 0.82) 66%, rgba(5, 7, 81, 0.95) 100%); }
+  .hero__grid { align-items: end; min-height: calc(100svh - var(--nav-h) - var(--round) - 2.2rem); }
+  .hero__copy { max-width: none; width: 100%; gap: 1.1rem; }
+  .hero__title { font-size: clamp(2.4rem, 11.4vw, 4rem); letter-spacing: -0.045em; line-height: 1.03; }
+  .hero__sub { padding-left: 1rem; font-size: clamp(1.05rem, 4.5vw, 1.5rem); }
+  .hero__sub::before { content: ""; position: absolute; left: 0; top: 0.15em; bottom: 0.15em; width: 0.22rem; border-radius: 2px; background: var(--accent-soft); transform: scaleY(0); transform-origin: top; animation: bar-draw 0.8s var(--ease) 0.7s forwards; }
+  .hero__tagline { order: 5; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; line-height: 1.9; }
+  .hero__tagline > span:not(:last-child)::after { content: " ·"; opacity: 0.6; }
+  .hero__actions { width: 100%; }
+}
+/* small portrait screens (phones): only heading, sub-heading and the main action */
+@media (max-aspect-ratio: 1/1) and (max-width: 47.99rem) {
+  .hero__text, .hero__tagline { display: none; }
+  .hero__actions { display: flex; flex-direction: column; align-items: stretch; gap: 0.2rem; margin-top: 0.6rem; }
+  .hero__actions .btn--light { position: relative; overflow: hidden; min-height: 3.5rem; justify-content: space-between; box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.35); }
+  .hero__actions .btn--light::after { content: ""; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%; background: linear-gradient(100deg, transparent, rgba(244, 193, 93, 0.35), transparent); transform: skewX(-18deg); animation: sheen 4.5s ease-in-out 1.8s infinite; pointer-events: none; }
+  .hero__actions .btn--outline-light { align-self: flex-start; min-height: 3rem; padding: 0.6em 0; border: 0; background: none; justify-content: flex-start; gap: 0.7rem; color: #fff; }
+  .hero__actions .btn--outline-light:hover { background: none; }
+  .hero__actions .btn--outline-light span { background: linear-gradient(currentColor, currentColor) 0 100% / 100% 0.1rem no-repeat; padding-bottom: 0.2rem; }
+}
+/* tablets held upright: a little more room, side-by-side buttons */
+@media (max-aspect-ratio: 1/1) and (min-width: 48rem) {
+  .hero__copy { max-width: 42rem; }
+  .hero__title { font-size: clamp(3rem, 8vw, 4.6rem); }
+  .hero__actions { width: auto; }
+}
+
+/* ======================== LANDSCAPE phones (very short screens) ======================== */
+@media (orientation: landscape) and (max-height: 32rem) {
+  .hero__text, .hero__tagline { display: none; }
+  .hero__copy { gap: 0.6rem; }
+}

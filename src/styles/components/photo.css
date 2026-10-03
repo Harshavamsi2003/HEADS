@@ -1,0 +1,24 @@
+/* ---------- photos ---------- */
+.photo { position: relative; overflow: hidden; margin: 0; border-radius: var(--radius-lg); background: var(--slate-100); isolation: isolate; box-shadow: var(--shadow-md); }
+.photo img { display: block; width: 100%; height: 100%; object-fit: cover; transition: scale 1.6s var(--ease); }
+.photo--fill { position: absolute; inset: 0; border-radius: 0; box-shadow: none; }
+/* settle-in: starts slightly zoomed, eases to normal once revealed; gentle zoom on hover */
+html.js .photo[data-reveal] img { scale: 1.14; }
+html.js .photo[data-in] img { scale: 1; }
+html.js .photo[data-in]:hover img { scale: 1.045; transition-duration: 1.1s; }
+.photo__cap { position: absolute; left: 0.9rem; bottom: 0.9rem; padding: 0.3rem 0.75rem; border-radius: 999px; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: rgba(5, 7, 81, 0.72); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+
+/* offset outline frame (used beside the software heading) */
+.frame { position: relative; }
+.frame::before { content: ""; position: absolute; inset: 1rem -1rem -1rem 1rem; border: 2px solid var(--accent-ink); border-radius: var(--radius-lg); opacity: 0.35; transition: inset 0.5s var(--ease), opacity 0.4s; }
+.frame:hover::before { inset: 0.6rem -0.6rem -0.6rem 0.6rem; opacity: 0.6; }
+@media (max-width: 40rem) { .frame::before { inset: 0.6rem -0.4rem -0.6rem 0.4rem; } }
+
+/* photo behind a dark section: the navy veil is solid so text always stays readable */
+.has-bg { isolation: isolate; }
+.sec-bg { position: absolute; inset: 0; z-index: 0; }
+.sec-bg img { width: 100%; height: 100%; object-fit: cover; transition: scale 2.4s var(--ease); }
+.sec-bg::after { content: ""; position: absolute; inset: 0; background: rgba(8, 11, 96, 0.86); }
+html.js .sec-bg[data-reveal] img { scale: 1.12; }
+html.js .sec-bg[data-in] img { scale: 1; }
+.has-bg > .container { position: relative; z-index: 1; }

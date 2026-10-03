@@ -1,0 +1,118 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "headsengg.com"
+        }
+      ],
+      "destination": "https://www.headsengg.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/industries",
+      "destination": "/services#industries",
+      "permanent": true
+    },
+    {
+      "source": "/projects",
+      "destination": "/services#projects",
+      "permanent": true
+    },
+    {
+      "source": "/projects/30m-frp-fishing-vessel",
+      "destination": "/services#projects",
+      "permanent": true
+    },
+    {
+      "source": "/quality-hse",
+      "destination": "/about-us#quality",
+      "permanent": true
+    },
+    {
+      "source": "/careers",
+      "destination": "/about-us#careers",
+      "permanent": true
+    },
+    {
+      "source": "/engineering-capabilities/software-digital-tools",
+      "destination": "/engineering-capabilities#software",
+      "permanent": true
+    },
+    {
+      "source": "/engineering-capabilities/site-field-support",
+      "destination": "/engineering-capabilities#site-field",
+      "permanent": true
+    },
+    {
+      "source": "/engineering-capabilities/ai-engineering-automation",
+      "destination": "/engineering-capabilities#ai-automation",
+      "permanent": true
+    },
+    {
+      "source": "/engineering-capabilities/engineering-standards",
+      "destination": "/engineering-capabilities#standards",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "(?<h>.*\\.vercel\\.app)"
+        }
+      ],
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/brand/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400"
+        }
+      ]
+    }
+  ]
+}
